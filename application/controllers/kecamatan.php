@@ -1,10 +1,10 @@
 <?php 
 
 
-class admin extends admin_controller {
+class kecamatan extends kecamatan_controller {
 	
 	var $controller;
-	public function admin(){
+	public function kecamatan(){
 		parent::__construct();
 		$this->controller = get_class($this);
 	}
@@ -20,7 +20,7 @@ class admin extends admin_controller {
 								);
 		// $content = "Hello";
 
-		$content = $this->load->view("admin/index_view",$data_array,true);
+		$content = $this->load->view("kecamatan/index_view",$data_array,true);
 
 		$this->set_subtitle("DASHBOARD");
 		$this->set_title("DASHBOARD");

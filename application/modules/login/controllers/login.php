@@ -10,7 +10,10 @@ class Login extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view("login_view");
+		$msg = '';
+
+		$psn_login = array('msg' => $msg );
+		$this->load->view("login_view", $psn_login);
 	}
 	
 	
@@ -18,22 +21,22 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata("admin_login",true);
 		redirect("login");
 	}
-	function logout_pengepul(){
-		$this->session->unset_userdata("pengepul_login",true);
+	function logout_kecamatan(){
+		$this->session->unset_userdata("kec_login",true);
 		redirect("login");
 	}
-	function logout_nasabah(){
-		$this->session->unset_userdata("nasabah_login",true);
+	function logout_desa(){
+		$this->session->unset_userdata("desa_login",true);
 		redirect("login");
 	}
 	
 
 	
-function cek_email($email) {
-	$this->db->where("email",$email);
-	$jumlah = $this->db->get("members")->num_rows();
+function cekusername($username) {
+	$this->db->where("username",$username);
+	$jumlah = $this->db->get("admin")->num_rows();
 	if($jumlah > 0) {
-		$this->form_validation->set_message('cek_email', "Email $email sudah terdaftar  ");
+		$this->form_validation->set_message('cek_username', "Username $username sudah terdaftar  ");
 		return false;
 	}
 }
@@ -60,16 +63,24 @@ function cek_password($password) {
 
 
 
+
+
+
+
+
+
 	function ceklogin(){
 
 		 $data = $this->input->post();
 		 $username = $data['form-username'];
-		 $password = $data['mask'];
+		 $password = md5($data['form-password']);
+
+		 
 
 		 
 		 $this->db->where("username",$username);
 		 $this->db->where("password",$password);
-		 $res = $this->db->get('super_admin');
+		 $res = $this->db->get('admin');
 
 		 if($res->num_rows()==1) {
 
@@ -78,67 +89,65 @@ function cek_password($password) {
 		 	// exit;
 
 		 	$member['login'] = true;
-		 	if($member['level'] == 1) {
-		 		
-				
-
-				$this->session->set_userdata('admin_login', $member);
-		 		$datalogin = $this->session->userdata("admin_login");
-		 		redirect('admin');
-
-		 		
-				
-
-
-		 	}
-		 	else if ($member['level'] == 2) {
-		 		
-		 		$this->session->set_userdata('pengepul_login', $member);
-		 		$datalogin = $this->session->userdata("pengepul_login");
-		 		redirect('pengepul');
-		 	}
-
-		 	else {
-		 		$ret = array("error"=>true,"message"=>"NOT An Option");
-		 	}
-
-
-
-
-		 	
-
-		 		
+		 	$this->session->set_userdata('admin_login', $member);
+		 	$datalogin = $this->session->userdata("admin_login");
+		 	redirect('admin');		
 		 	// $ret = array("error"=>true,"message"=>"Kombinasi Email Dan Password Tidak Dikenali");
+
+
 
 		 }
 		 else {
 
-		 	$this->db->where("username",$username);
-		 	$this->db->where("password",$password);
-		 	$nasabah = $this->db->get('nasabah');
 
-		 	if ($nasabah->num_rows()==0) {
-		 		redirect('login');
+		 	$this->db->where("username", $username);
+		 	$this->db->where("password", $password);
+		 	$res = $this->db->get("admin_kecamatan");
+
+		 	if($res->num_rows()==1){
+		 		$member = $res->row_array();
+
+		 		$member["login"] = true;
+		 		$this->session->set_userdata('kec_login', $member);
+		 		$datalogin = $this->session->userdata('kec_login');
+
+		 		redirect('kecamatan');
 		 	}else{
 
-		 		$member = $nasabah->row_array();
+		 		$this->db->where("username", $username);
+		 		$this->db->where("password", $password);
+		 		$res = $this->db->get("admin_desa");
+
+		 		if ($res->num_rows()==1) {
+		 			$member = $res->row_array();
+
+		 			$member["login"] = true;
+
+		 			$this->session->set_userdata("desa_login", $member);
+		 			$datalogin = $this->session->userdata("desa_login");
+
+		 			redirect("desa");
+		 		}else{
+
+		 			$msg = '<div class="alert bg-danger" role="alert">
+						<svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Kombinasi Username Dan Password Salah <a href="#" class="pull-right"><span id="hide" class="glyphicon glyphicon-remove"></span></a>
+						</div>';
+
+
+					$psn_login = array('msg' => $msg );
+					$this->load->view("login_view", $psn_login);
+		 		}
+
 		 	
-
-		 		$member['login'] = true;
-
-		 		$this->session->set_userdata('nasabah_login', $member);
-		 		$datalogin = $this->session->userdata("nasabah_login");
-		 		redirect('nasabah');
 		 	}
-
-		 }
-
-
-		 echo json_encode($ret);
- 
-		 
-		 
+		 	
+		}	 
 	}
+
+
+
+
+
 	
 		function cekEmail(){
 		$email = $this->input->post('email');

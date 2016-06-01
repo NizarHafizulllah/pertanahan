@@ -1,5 +1,6 @@
+
 <?php 
-$userdata = $this->session->userdata('admin_login');
+$userdata = $this->session->userdata('kec_login');
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +11,6 @@ $userdata = $this->session->userdata('admin_login');
 	  <title><?php echo $title ?></title>
     <!-- Tell the browser to be responsive to screen width -->
 	  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-    
-  
     <!-- Bootstrap 3.3.5 -->
 	  <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>">
     <!-- Font Awesome -->
@@ -62,7 +60,6 @@ folder instead of downloading all of them to reduce the load. -->
     <script src="<?php echo base_url('assets/dist/js/demo.js'); ?>"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrapValidator.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap/bootstrap-dialog.min.js"></script>
-    
 
 
 
@@ -73,11 +70,11 @@ folder instead of downloading all of them to reduce the load. -->
 
 		<header class="main-header">
         <!-- Logo -->
-		  <a href="<?php echo site_url('admin'); ?>" class="logo">
+		  <a href="<?php echo site_url('kecamatan'); ?>" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><b>S</b>A</span>
+			<span class="logo-mini"><b>K</b>c</span>
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg"><b>Super </b>Admin</span>
+			<span class="logo-lg"><b>Kecamatan </b></span>
 		  </a>
         <!-- Header Navbar: style can be found in header.less -->
 		  <nav class="navbar navbar-static-top" role="navigation">
@@ -92,20 +89,21 @@ folder instead of downloading all of them to reduce the load. -->
 			  <ul class="nav navbar-nav">
 				  <!-- User Acount -->
 				  <li class="dropdown user user-menu">
-				  	<a href="#" class="dropdown-toggle" data-toggle = "dropdown"><i class="glyphicon glyphicon-user"></i><span class="hidden-xs">ADMIN</span></a>
+				  	<a href="#" class="dropdown-toggle" data-toggle = "dropdown"><i class="glyphicon glyphicon-user"></i><span class="hidden-xs"><?php echo $userdata['nama'] ?></span></a>
 				  	<ul class="dropdown-menu">
 					  <li class="user-header">
-							<p>ADMIN
+							<p><?php echo $userdata['nama'] ?>
+						  	<small><?php echo $userdata['username'] ?></small>
 								</p>
-								<p><h2 style="color: white;">Admin</h2></p>
+								<p><h2 style="color: white;">Admin Kecamatan</h2></p>
 						</li>	
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo site_url('admin_profil'); ?>" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo site_url('kecamatan_profile'); ?>" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo site_url('login/logout_admin'); ?>" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo site_url('login/logout_kecamatan'); ?>" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
 					  </ul>
@@ -139,8 +137,8 @@ folder instead of downloading all of them to reduce the load. -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="<?php echo site_url('admin'); ?>">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
+              <a href="<?php echo site_url('kecamatan'); ?>">
+                <i class="fa fa-home"></i> <span>Dashboard</span></i>
               </a>
             </li>
             <li class="treeview">
@@ -148,8 +146,8 @@ folder instead of downloading all of them to reduce the load. -->
                 <i class="fa fa-edit"></i> <span>Data Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo site_url('admin_add_kecamatan'); ?>"><i class="fa fa-user-plus"></i> Admin Kecamatan</a></li>
-                 
+                <li><a href="<?php echo site_url('regis_kec'); ?>"><i class="fa fa-folder"></i> Data Pertanahan</a></li>
+                <li><a href="<?php echo site_url('kecamatan_add_desa'); ?>"><i class="fa fa-user-plus"></i> Tambah Admin Desa</a></li>
               </ul>
             </li>
           </ul>
@@ -164,8 +162,8 @@ folder instead of downloading all of them to reduce the load. -->
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            <?php echo $subtitle; ?>
-            <small></small>
+            <?php echo $title; ?>
+            <small><?php echo $subtitle; ?></small>
           </h1>
         </section>
 

@@ -5,7 +5,9 @@ jQuery(document).ready(function() {
         Fullscreen background
     */
     
-    
+    $('#hide').onclick(function(){
+        $('.alert').slideUp(200);
+    });
     /*
         Login form validation
     */
