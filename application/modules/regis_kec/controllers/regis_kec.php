@@ -363,7 +363,7 @@ else {
     	$get = $this->input->post();
     	$id = $get['id'];
 
-    	$userdata = $this->session->userdata()
+    	$userdata = $this->session->userdata();
 
     	
 
