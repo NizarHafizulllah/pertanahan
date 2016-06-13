@@ -37,7 +37,12 @@ $(document).ready(function(){
 
 });
 	
-
+function print(id){
+  
+   
+  window.open('<?php echo site_url("regis_desa/pdf?id=") ?>'+id);
+  
+}
 
 
 
@@ -100,6 +105,8 @@ BootstrapDialog.show({
           });
 
 }
+
+
  		 
 
 

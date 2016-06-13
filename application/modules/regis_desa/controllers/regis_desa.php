@@ -13,18 +13,6 @@ class regis_desa extends desa_controller{
 	}
 
 
-    function cekEmail(){
-        $no_hp = $this->input->post('no_hp');
-        $valid = true;
-        $this->db->where('no_hp', $no_hp);
-        $jumlah = $this->db->get("super_admin")->num_rows();    
-        if($jumlah == 1) {
-            $valid = false;
-        }
-        
-        echo json_encode(array('valid' => $valid));
-    
-    }
 
 
 
@@ -87,6 +75,10 @@ function cek_passwd($p1){
     }
 }
 
+
+
+
+
 function simpan(){
 
 
@@ -119,6 +111,9 @@ function simpan(){
         //show_array($data);
 
 if($this->form_validation->run() == TRUE ) { 
+
+        $userdata = $this->session->userdata('desa_login');
+        $post['kades'] = $userdata['kepala_desa']; 
 
         
         $res = $this->db->insert('tanah', $post); 
@@ -233,8 +228,7 @@ function get_desa(){
                                 <span class="sr-only">Toggle Dropdown</span>
                               </button>
                               <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"  onclick=\'hapus($id)\'><i class="fa fa-trash"></i> Hapus</a></li>
-                                <li><a href="$this->controller/editdata?id=$id"><i class="fa fa-edit"></i> Edit</a></li>
+                                <li><a href="#"  onclick=\'print('.$id.')\'><i class="fa fa-trash"></i> Cetak</a></li>
                               </ul>
                             </div>';
         }
@@ -373,6 +367,68 @@ else {
     	//redirect('sa_birojasa_user');
         echo json_encode($arr);
     }
+
+
+
+
+  function pdf() {
+
+    $get = $this->input->get(); 
+    $id = $get['id'];
+
+    
+    $this->db->where('id', $id);
+    $rs = $this->db->get('tanah');
+    $data = $rs->row_array();
+    extract($data);
+
+    $this->db->where('id', $desa_tanah);
+    $qr = $this->db->get('tiger_desa');
+    $rs = $qr->row_array();
+    $data['desa_tanah'] = $rs['desa'];
+
+    $this->db->where('id', $kec_tanah);
+    $qr = $this->db->get('tiger_kecamatan');
+    $rs = $qr->row_array();
+    $data['kec_tanah'] = $rs['kecamatan'];
+
+    $this->db->where('id', $kab_tanah);
+    $qr = $this->db->get('tiger_kota');
+    $rs = $qr->row_array();
+    $data['kab_tanah'] = $rs['kota'];
+
+
+    $data['controller'] = get_class($this);
+    $data['header'] = "data";
+    $data['title'] = $data['header'];
+    $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetTitle( $data['header']);
+     
+        $pdf->SetMargins(10, 10, 10);
+        $pdf->SetHeaderMargin(10);
+        $pdf->SetFooterMargin(10);
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+        $pdf->SetAutoPageBreak(true,10);
+        $pdf->SetAuthor('PKPD  taujago@gmail.com');
+         
+            
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(true);
+
+         // add a page
+        $pdf->AddPage('P');
+
+ 
+
+         $html = $this->load->view("regis_desa_pdf_view",$data,true);
+         $pdf->writeHTML($html, true, false, true, false, '');
+
+ 
+         $pdf->Output($data['header']. $this->session->userdata("tahun") .'.pdf', 'I');
+}
+
 
 
 }

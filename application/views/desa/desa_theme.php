@@ -143,10 +143,11 @@ folder instead of downloading all of them to reduce the load. -->
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>Pertanahan</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-edit"></i> <span>Pedaftaran Tanah</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo site_url('regis_desa'); ?>"><i class="fa fa-circle-o"></i> Registrasi Tanah</a></li>
+                <li><a href="<?php echo site_url('regis_desa'); ?>"><i class="fa fa-circle-o"></i> Surat Pernyataan</a></li>
+                <li><a href="<?php echo site_url('berita_desa'); ?>"><i class="fa fa-circle-o"></i> Berita Acara</a></li>
               </ul>
             </li>
           </ul>

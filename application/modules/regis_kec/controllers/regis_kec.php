@@ -43,50 +43,8 @@ function index(){
 }
 
 
-function baru(){
-        $data_array=array();
-
-        // $userdata = $this->session->userdata('admin_login');
-        // $username1 = $userdata['username'];
 
 
-        $data_array['action'] = 'simpan';
-        $content = $this->load->view($this->controller."_form_view",$data_array,true);
-
-
-        $data_array['arr_kecamatan'] = $this->cm->arr_dropdown3("tiger_kecamatan", "id", "kecamatan", "kecamatan", "id_kota", "19_5");
-       
-        $content = $this->load->view($this->controller."_form_view",$data_array,true);
-
-        $this->set_subtitle("Desa");
-        $this->set_title("Register Pertanahan");
-        $this->set_content($content);
-        $this->cetak();
-}
-
-
-function cek_email($no_hp){
-    $this->db->where("no_hp",$no_hp);
-    if($this->db->get("super_admin")->num_rows() > 0)
-    {
-         $this->form_validation->set_message('cek_email', ' %s Sudah ada');
-         return false;
-    }
-
-}
-
-function cek_passwd($p1){
-    $p2 = $this->input->post('p2');
-
-    if(empty($p1) or empty($p2)){
-         $this->form_validation->set_message('cek_passwd', ' %s harus diisi');
-         return false;
-    }
-    if($p1 <> $p2) {
-        $this->form_validation->set_message('cek_passwd', ' %s tidak sama');
-         return false;
-    }
-}
 
 function simpan(){
 
@@ -281,11 +239,11 @@ function get_desa(){
 
         $data['action'] = 'update';
          
-		$content = $this->load->view("regis_kec_form_view_detail",$data,true);
+		$content = $this->load->view("regis_kec_view_form_detail",$data,true);
 
        
 
-		$this->set_subtitle("Detail Registrasi Pertanahan");
+		$this->set_subtitle("");
 		$this->set_title("Detail Registrasi Pertanahan");
 		$this->set_content($content);
 		$this->cetak();
@@ -310,6 +268,20 @@ function get_desa(){
 
 }
 
+function cek_no_reg($no_register_kec){
+    $this->db->where("no_register_kec",$no_register_kec);
+
+    if(empty($no_register_kec)){
+         $this->form_validation->set_message('cek_no_reg', ' No Registrasi Harus Di Isi');
+         return false;
+    }
+    if($this->db->get("tanah")->num_rows() > 0)
+    {
+         $this->form_validation->set_message('cek_no_reg', ' Sudah Ada Data Dengan No Registrasi Ini');
+         return false;
+    }
+}
+
 
 
 function update(){
@@ -321,8 +293,8 @@ function update(){
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nama_pemilik','Nama Pemilik','required'); 
-        // $this->form_validation->set_rules('email','Email','callback_cek_email');   
+        $this->form_validation->set_rules('tgl_register_kec','Tanggal Registrasi','required'); 
+        $this->form_validation->set_rules('no_register_kec','Registrasi','callback_cek_no_reg');   
         // $this->form_validation->set_rules('email','Email','callback_cek_email');    
         // $this->form_validation->set_rules('pelaksana_nip','NIP','required');         
          
@@ -336,18 +308,22 @@ function update(){
 
 if($this->form_validation->run() == TRUE ) { 
 
-        $post['tgl_lhr_pemilik'] = flipdate($post['tgl_lhr_pemilik']);
-         $post['tgl_pernyataan'] = flipdate($post['tgl_pernyataan']);
-         $post['tgl_register_desa'] = flipdate($post['tgl_register_desa']);
+        $userdata = $this->session->userdata('kec_login');
+        $post['camat'] = $userdata['nama_camat'];
+        $post['jabatan_camat'] = $userdata['jabatan_camat'];
+        $post['nip_camat'] = $userdata['nip_camat'];
+
+        $post['tgl_register_kec'] = flipdate($post['tgl_register_kec']);
+        $post['status'] = 2;
 
 
         $this->db->where("id",$post['id']);
         $res = $this->db->update('tanah', $post); 
         if($res){
-            $arr = array("error"=>false,'message'=>"BERHASIL DIUPDATE");
+            $arr = array("error"=>false,'message'=>"Register Kecamatan Berhasil");
         }
         else {
-             $arr = array("error"=>true,'message'=>"GAGAL  DIUPDATE");
+             $arr = array("error"=>true,'message'=>"Register Kecamatan Gagal");
         }
 }
 else {
