@@ -28,8 +28,8 @@
                               <label for="kembali">Tanggal Register</label>
                               <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
                               <input type="text" id="tanggal" name="tgl_register_kec" class="tanggal ui-datepicker form-control" placeholder="Tanggal Register"  data-date-format="dd-mm-yyyy">
-                              <label>No. Register</label>
-                              <input type="text" name="no_register_kec" class="form-control">
+                              <label>No. Data</label>
+                              <input type="text" name="no_data_kec" value="<?php echo $no_data_kec ?>" class="form-control" readonly>
                               <br/>
                             </div>
                           </div>

@@ -153,7 +153,7 @@
 <br/> 
 <table width="100%" border="0" cellpadding="3">
   <tr>
-    <td width="3%">&nbsp;</td>
+    <td width="3%" height="25">&nbsp;</td>
     <td width="3%">&nbsp; </td>
     <td width="94%">Dengan batas-batas yang telah disetujui oleh saksi yang berbatasan sebagai berikut :</td>
   </tr>
@@ -461,23 +461,20 @@
 <table width="100%">
   <tr>
     <td width="6%">&nbsp;</td>
-    <td width="30%" colspan="2" >Diregister di Kecamatan <?php echo $kec_tanah; ?> </td>
-    <td width="24%" ></td>
-    <td width="40%" colspan="2">Diregister di Kelurahan/Desa <?php echo $desa_tanah; ?> </td>
+    <td colspan="2" >Diregister di Kecamatan <?php echo $kec_tanah; ?> </td>
+    <td colspan="2" width="49%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diregister di Kelurahan/Desa <?php echo $desa_tanah; ?> </td>
   </tr>
   <tr>
     <td width="6%">&nbsp;</td>
-    <td width="10%">Nomor</td>
-    <td width="20%">: <?php echo $no_register_kec; ?></td>
-    <td width="24%">&nbsp; </td>
-    <td width="10%">Nomor</td>
-    <td width="30%">: <?php echo $no_register_desa ?></td>
+    <td width="18%">Nomor</td>
+    <td width="27%">: <?php echo $no_register_kec; ?></td>
+    <td width="21%">Nomor</td>
+    <td width="28%">: <?php echo $no_register_desa ?></td>
   </tr> 
   <tr>
     <td>&nbsp;</td>
     <td>Tanggal</td>
     <td>: <?php echo flipdate($tgl_register_kec); ?></td>
-    <td>&nbsp; </td>
     <td>Tanggal</td>
     <td>: <?php echo flipdate($tgl_register_desa); ?> </td>
   </tr> 
@@ -485,57 +482,48 @@
     <td>&nbsp;</td>
     <td>Mengetahui </td>
     <td>: </td>
-    <td>&nbsp; </td>
     <td>Mengetahui</td>
     <td>: </td>
   </tr>   
   <tr>
     <td width="6%">&nbsp;</td>
-    <td width="30%" colspan="2" ><b>CAMAT <?php echo $kec_tanah; ?> </b> </td>
-    <td width="24%" ></td>
-    <td width="40%" colspan="2"><b>KEPALA DESA <?php echo $desa_tanah; ?> </b></td>
+    <td colspan="2" ><b>CAMAT <?php echo $kec_tanah; ?> </b> </td>
+    <td colspan="2"><b>KEPALA DESA <?php echo $desa_tanah; ?> </b></td>
   </tr>
    <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td width="6%">&nbsp;</td>
-    <td width="30%" colspan="2" ><b><?php echo $camat; ?></b></td>
-    <td width="24%">&nbsp;</td>
-    <td td width="40%" colspan="2"><b><?php echo $kades; ?></b></td>
+    <td colspan="2" ><b><?php echo $camat; ?></b></td>
+    <td td colspan="2"><b><?php echo $kades; ?></b></td>
   </tr>  
    <tr>
-    <td width="6%">&nbsp;</td>
-    <td width="30%" colspan="2"><b><?php echo $jabatan_camat; ?></b></td>
-    <td width="24%">&nbsp;</td>
-    <td td width="40%" colspan="2">&nbsp;</td>
+    <td width="6%" height="21">&nbsp;</td>
+    <td colspan="2"><b><?php echo $jabatan_camat; ?></b></td>
+    <td td colspan="2">&nbsp;</td>
   </tr>
   <tr>
-    <td width="6%">&nbsp;</td>
-    <td width="30%" colspan="2"><b>NIP. <?php echo $nip_camat; ?></b></td>
-    <td width="24%">&nbsp;</td>
-    <td td width="40%" colspan="2">&nbsp;</td>
+    <td width="6%" height="28">&nbsp;</td>
+    <td colspan="2"><b>NIP. <?php echo $nip_camat; ?></b></td>
+    <td td colspan="2">&nbsp;</td>
   </tr>  
 </table> 
     

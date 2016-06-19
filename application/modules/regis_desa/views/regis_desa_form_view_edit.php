@@ -146,40 +146,27 @@
                       <input type="text" class="form-control" placeholder="Batas Utara ..." name="batas_u" value="<?php echo $batas_u; ?>">
                     </div>
 
-                    <div class="form-group">
-                      <label>Pemilik Tanah</label>
-                      <input type="text" class="form-control" placeholder="Pemilik Tanah ..." name="nama_batas_u" value="<?php echo $nama_batas_u; ?>">
-                    </div>
-
+                   
                     <div class="form-group">
                       <label>Batas Selatan</label>
                       <input type="text" class="form-control" placeholder="Batas Selatan ..." name="batas_s" value="<?php echo $batas_s; ?>">
                     </div>
 
-                    <div class="form-group">
-                      <label>Pemilik Tanah</label>
-                      <input type="text" class="form-control" placeholder="Pemilik Tanah ..." name="nama_batas_s" value="<?php echo $nama_batas_s; ?>">
-                    </div>
+                 
 
                     <div class="form-group">
                       <label>Batas Timur</label>
                       <input type="text" class="form-control" placeholder="Batas Timur ..." name="batas_t" value="<?php echo $batas_t; ?>">
                     </div>
 
-                    <div class="form-group">
-                      <label>Pemilik Tanah</label>
-                      <input type="text" class="form-control" placeholder="Pemilik Tanah ..." name="nama_batas_t" value="<?php echo $nama_batas_t; ?>">
-                    </div>
+                   
 
                     <div class="form-group">
                       <label>Batas Barat</label>
                       <input type="text" class="form-control" placeholder="Batas Barat ..." name="batas_b" value="<?php echo $batas_b; ?>">
                     </div>
 
-                    <div class="form-group">
-                      <label>Pemilik Tanah</label>
-                      <input type="text" class="form-control" placeholder="Pemilik Tanah ..." name="nama_batas_b" value="<?php echo $nama_batas_b; ?>">
-                    </div>
+                  
 
                     <div class="form-group">
                       <label>Yang Terdapat Di Perkarangan</label>
@@ -191,7 +178,7 @@
 
                <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 1</h3>
+                  <h3 class="box-title">Pemilik Tanah Bagian Utara</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -247,7 +234,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 2</h3>
+                  <h3 class="box-title">Pemilik Tanah Bagian Barat</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -283,7 +270,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 3</h3>
+                  <h3 class="box-title">Pemilik Tanah Bagian Timur</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -319,7 +306,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 4</h3>
+                  <h3 class="box-title">Pemilik Tanah Bagian Selatan</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -356,7 +343,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 5</h3>
+                  <h3 class="box-title">Data Pengukur 1</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -393,7 +380,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Data Saksi 6</h3>
+                  <h3 class="box-title">Data Pengukur 2</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   
@@ -438,7 +425,7 @@
                     
                     <div class="form-group">
                       <label>Yang Membuat Pernyataan</label>
-                      <input type="text" name="no_register_desa" class="form-control" placeholder="No Registrasi ..." value="<?php echo $no_register_desa; ?>">
+                      <input type="text" name="no_data_desa" class="form-control" placeholder="No. Data" value="<?php echo $no_data_desa; ?>" readonly>
                     </div>
                     <!-- textarea -->
                     <div class="form-group">

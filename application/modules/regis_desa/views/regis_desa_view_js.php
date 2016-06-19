@@ -37,10 +37,24 @@ $(document).ready(function(){
 
 });
 	
-function print(id){
+function printper(id){
   
    
-  window.open('<?php echo site_url("regis_desa/pdf?id=") ?>'+id);
+  window.open('<?php echo site_url("regis_desa/pdfper?id=") ?>'+id);
+  
+}
+
+function printket(id){
+  
+   
+  window.open('<?php echo site_url("regis_desa/pdfket?id=") ?>'+id);
+  
+}
+
+function printber(id){
+  
+   
+  window.open('<?php echo site_url("regis_desa/pdfberita?id=") ?>'+id);
   
 }
 

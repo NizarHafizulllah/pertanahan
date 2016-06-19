@@ -14,19 +14,6 @@ class regis_kec extends kecamatan_controller{
 	}
 
 
-    function cekEmail(){
-        $no_hp = $this->input->post('no_hp');
-        $valid = true;
-        $this->db->where('no_hp', $no_hp);
-        $jumlah = $this->db->get("super_admin")->num_rows();    
-        if($jumlah == 1) {
-            $valid = false;
-        }
-        
-        echo json_encode(array('valid' => $valid));
-    
-    }
-
 
 
 
@@ -44,70 +31,6 @@ function index(){
 
 
 
-
-
-function simpan(){
-
-
-    $post = $this->input->post();
-    
-       
-
-
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama_pemilik','Nama Pengguna','required');   
-        // $this->form_validation->set_rules('pelaksana_nip','NIP','required');         
-         
-        $this->form_validation->set_message('required', ' %s Harus diisi ');
-        
-        $this->form_validation->set_error_delimiters('', '<br>');
-
-     
-        
-        
-
-        $post['tgl_lhr_pemilik'] = flipdate($post['tgl_lhr_pemilik']);
-        $post['tgl_pernyataan'] = flipdate($post['tgl_pernyataan']);
-        $post['tgl_register_desa'] = flipdate($post['tgl_register_desa']);
-        $userdata = $this->session->userdata('desa_login');
-        $post['desa_tanah'] = $userdata['desa'];
-        $post['kec_tanah'] = $userdata['kecamatan'];
-        
-
-        $post['status'] = '1';
-        //show_array($data);
-
-if($this->form_validation->run() == TRUE ) { 
-
-        
-        $res = $this->db->insert('tanah', $post); 
-        if($res){
-            $arr = array("error"=>false,'message'=>"BERHASIL DISIMPAN");
-        }
-        else {
-             $arr = array("error"=>true,'message'=>"GAGAL  DISIMPAN");
-        }
-}
-else {
-    $arr = array("error"=>true,'message'=>validation_errors());
-}
-        echo json_encode($arr);
-}
-
-
-function get_desa(){
-    $data = $this->input->post();
-
-    $id_kecamatan = $data['id_kecamatan'];
-    $this->db->where("id_kecamatan",$id_kecamatan);
-    $this->db->order_by("desa");
-    $rs = $this->db->get("tiger_desa");
-    foreach($rs->result() as $row ) :
-        echo "<option value=$row->id>$row->desa </option>";
-    endforeach;
-
-
-}
 
 
     function get_data() {
@@ -229,9 +152,35 @@ function get_desa(){
     	 $biro_jasa = $this->db->get('tanah');
     	 $data = $biro_jasa->row_array();
 
+        $this->db->where('id', $id);
+        $rs = $this->db->get('tanah');
+        $data = $rs->row_array();
+        extract($data);
+
+        $this->db->where('id', $desa_tanah);
+        $qr = $this->db->get('tiger_desa');
+        $rs = $qr->row_array();
+        $data['desa_tanah'] = $rs['desa'];
+
+        $this->db->where('id', $kec_tanah);
+        $qr = $this->db->get('tiger_kecamatan');
+        $rs = $qr->row_array();
+        $data['kec_tanah'] = $rs['kecamatan'];
+
+        $this->db->where('id', $kab_tanah);
+        $qr = $this->db->get('tiger_kota');
+        $rs = $qr->row_array();
+        $data['kab_tanah'] = $rs['kota'];
+
          $data['tgl_lhr_pemilik'] = flipdate($data['tgl_lhr_pemilik']);
          $data['tgl_pernyataan'] = flipdate($data['tgl_pernyataan']);
          $data['tgl_register_desa'] = flipdate($data['tgl_register_desa']);
+
+        $userdata = $this->session->userdata('kec_login');
+         $this->db->where('kec_tanah', $userdata['kecamatan']);
+         $this->db->where('status', 2);
+        $rs = $this->db->get('tanah');
+        $data['no_data_kec'] = $rs->num_rows()+1;
 
         $data['arr_kecamatan'] = $this->cm->arr_dropdown3("tiger_kecamatan", "id", "kecamatan", "kecamatan", "id_kota", "19_5");
        
@@ -252,21 +201,6 @@ function get_desa(){
 
 
 
-
-
- function get_kecamatan(){
-    $data = $this->input->post();
-
-    $id_kota = $data['id_kota'];
-    $this->db->where("id_kota",$id_kota);
-    $this->db->order_by("kecamatan");
-    $rs = $this->db->get("tiger_kecamatan");
-    foreach($rs->result() as $row ) :
-        echo "<option value=$row->id>$row->kecamatan </option>";
-    endforeach;
-
-
-}
 
 function cek_no_reg($no_register_kec){
     $this->db->where("no_register_kec",$no_register_kec);
@@ -294,9 +228,10 @@ function update(){
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('tgl_register_kec','Tanggal Registrasi','required'); 
-        $this->form_validation->set_rules('no_register_kec','Registrasi','callback_cek_no_reg');   
-        // $this->form_validation->set_rules('email','Email','callback_cek_email');    
-        // $this->form_validation->set_rules('pelaksana_nip','NIP','required');         
+        $userdata = $this->session->userdata('kec_login');
+        $post['no_register_kec'] = $post['no_data_kec'].''.$userdata['format_reg'];
+        $post['no_ket_kec'] = $post['no_data_kec'].''.$userdata['format_ket'];
+                
          
         $this->form_validation->set_message('required', ' %s Harus diisi ');
         

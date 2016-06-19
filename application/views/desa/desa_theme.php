@@ -100,7 +100,7 @@ folder instead of downloading all of them to reduce the load. -->
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo site_url('nasabah_profile'); ?>" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo site_url('profil_desa'); ?>" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo site_url('login/logout_desa'); ?>" class="btn btn-default btn-flat">Sign out</a>
@@ -137,7 +137,7 @@ folder instead of downloading all of them to reduce the load. -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="<?php echo site_url('nasabah'); ?>">
+              <a href="<?php echo site_url('desa'); ?>">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
               </a>
             </li>

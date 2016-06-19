@@ -50,7 +50,7 @@
 <thead>
   <tr  >
       <th width="7%">Tgl. Registrasi</th>
-        <th width="20%">No. Registrasi</th>
+        <th width="20%">No. Data</th>
         <th width="21%">Nama Pemilik </th>
         <th width="14%">#</th>
     </tr>
